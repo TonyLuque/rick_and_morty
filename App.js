@@ -1,8 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import {
-  Button,
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,9 +8,7 @@ import {
   View,
 } from "react-native";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+import Card from "./components/card";
 
 const axios = require("axios");
 
@@ -66,33 +62,15 @@ export default function App() {
 
   const cards = data.data.results.map((e) => {
     return (
-      <View key={e.id}>
-        <Text>{e.name}</Text>
-        <Image source={{ uri: e.image }} style={{ width: 300, height: 300 }} />
-        {e.species == "Human" ? (
-          <MaterialCommunityIcons name="human" size={24} color="black" />
-        ) : e.species == "Alien" ? (
-          <MaterialCommunityIcons name="alien" size={24} color="lime" />
-        ) : (
-          <View style={{ width: 24, height: 24 }}></View>
-        )}
-        {e.status == "Alive" ? (
-          <MaterialCommunityIcons
-            name="account-heart"
-            size={24}
-            color="#00FA9A"
-          />
-        ) : e.status == "Dead" ? (
-          <MaterialCommunityIcons name="skull" size={24} color="black" />
-        ) : (
-          <FontAwesome name="question" size={24} color="black" />
-        )}
-        {e.gender == "Male" ? (
-          <Ionicons name="male" size={24} color="blue" />
-        ) : (
-          <Ionicons name="female" size={24} color="pink" />
-        )}
-      </View>
+      <Card
+        key={e.id}
+        id={e.id}
+        name={e.name}
+        image={e.image}
+        species={e.species}
+        status={e.status}
+        gender={e.gender}
+      />
     );
   });
 
